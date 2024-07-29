@@ -1,6 +1,8 @@
-import {useState} from 'react';
-import {EXAMPLES} from '../data.js';
+import { useState } from 'react';
+import { EXAMPLES } from '../data.js';
 import TabButton from './TabButton.jsx';
+import Section from './Section.jsx';
+import Tabs from './Tabs.jsx'
 
 function Examples() {
   // useState는 배열을 반환하며 배열안의 값은 2개이다.
@@ -30,16 +32,20 @@ function Examples() {
   }
 
   return (
-    <section id="examples">
-      <h2>Examples</h2>
-      <menu>
-        <TabButton isSelected={selectedTopic == 'components'} onSelect={() => { handleSelect('components') }}>Compoents</TabButton>
-        <TabButton isSelected={selectedTopic == 'jsx'} onSelect={function () { handleSelect('jsx') }}>JSX</TabButton>
-        <TabButton isSelected={selectedTopic == 'props'} onSelect={() => { handleSelect('props') }}>Props</TabButton>
-        <TabButton isSelected={selectedTopic == 'state'} onSelect={() => { handleSelect('state') }}>State</TabButton>
-      </menu>
-      {tabContent}
-    </section>
+    /* 전달 속성 패턴(대리 속성) 사용 */
+    <Section id="examples" title="Examples">
+      <Tabs 
+        buttons={
+          <>
+            <TabButton isSelected={selectedTopic == 'components'} onClick={() => { handleSelect('components') }}>Compoents</TabButton>
+            <TabButton isSelected={selectedTopic == 'jsx'} onClick={() => { handleSelect('jsx') }}>JSX</TabButton>
+            <TabButton isSelected={selectedTopic == 'props'} onClick={() => { handleSelect('props') }}>Props</TabButton>
+            <TabButton isSelected={selectedTopic == 'state'} onClick={() => { handleSelect('state') }}>State</TabButton>
+          </>
+        }>
+        {tabContent}
+      </Tabs>
+    </Section>
   );
 }
 

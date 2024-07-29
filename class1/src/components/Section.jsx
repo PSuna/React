@@ -6,3 +6,5 @@ function Section({title,children, ...props}){
     </section>
   );
 }
+
+export default Section;
