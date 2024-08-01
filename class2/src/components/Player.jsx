@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function Player({initialName, symbol}){
+function Player({initialName, symbol, isActive, onChangeName}){
     const [playerName, setPlayerName] = useState(initialName);
     const [isEditing, setIsEditing] = useState(false);
 
@@ -10,8 +10,15 @@ function Player({initialName, symbol}){
         // 함수를 사용해야한다 -> 해당 상태값은 항상 최신버전의 값을 가져오도록 보장되어있음
         setIsEditing(editing => !editing);
 
+        if(isEditing){
+            onChangeName(symbol,playerName);
+        }
+
         // 상태값을 이전값을 기반으로 변경하려는 경우 옳지않은 방식
         // setIsEditing(!isEditing);
+
+    
+
     }
 
     function handleChange(event){
@@ -26,7 +33,7 @@ function Player({initialName, symbol}){
     }
 
     return (
-        <li>
+        <li className={isActive ? 'active' : undefined}>
             <span className="player">
               {editablePlayerName}
               <span className="player-symbol">{symbol}</span>
